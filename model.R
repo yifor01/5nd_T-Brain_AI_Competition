@@ -23,9 +23,6 @@ cust_data = left_join(cust_data,dat3 %>% group_by(CUST_NO) %>% summarise("web_n1
 # 顧客累計瀏覽獨立網頁數
 cust_data = left_join(cust_data,dat3 %>% group_by(CUST_NO) %>% unique() %>% summarise("web_n2" = n()))
 
-
-
-
 # 利用交易資料補 CUST_START_DT
 mis_data = full_join(dat1,dat4[,1:2])
 mis_data = full_join(mis_data,dat5[,1:2])
@@ -45,9 +42,6 @@ rm(mis_data)
 
 cust_data$CUST_START_DT[cust_data$CUST_START_DT>99999] = NA
 
-
-
-
 # 顧客每天造訪網頁頻率(銀行往來日) &  顧客每天造訪獨立網頁頻率(銀行往來日)
 cust_data = cust_data %>% mutate("web_f1" = web_n1/(9597-CUST_START_DT),"web_f2" = web_n2/(9597-CUST_START_DT)  )  
 
@@ -59,12 +53,8 @@ cust_data = cust_data %>% mutate("web_f3" = web_n1/(9597-first_web),"web_f4" = w
 cust_data$s_index = seq(1,nrow(cust_data))
 cust_data$GENDER_CODE = as.numeric(cust_data$GENDER_CODE)
 
-
-
-
 # 補遺失值
 colSums(is.na(cust_data))[colSums(is.na(cust_data))>0]
-
 cust_data$CC_RECENT_DT[is.na(cust_data$CC_RECENT_DT)] = 9999
 cust_data$FX_RECENT_DT[is.na(cust_data$FX_RECENT_DT)] = 9999
 cust_data$LN_RECENT_DT[is.na(cust_data$LN_RECENT_DT)] = 9999
@@ -364,12 +354,3 @@ colSums(is.na(XX_test))[colSums(is.na(XX_test))>0]
 ######################################################################################################
 write.csv(data.frame(XX_train,y1=cc_90$y,y2=fx_90$y,y3=ln_90$y,y4=wm_90$y),file = "x_train_cat.csv",row.names = F)
 write.csv(XX_test,file = "x_test_cat.csv",row.names = F)
-
-
-
-
-
-
-
-
-
