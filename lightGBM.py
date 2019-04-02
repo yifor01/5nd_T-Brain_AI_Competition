@@ -1,4 +1,4 @@
-# lightGBM
+# lightGBM (tune parameter)
 
 from sklearn.grid_search import GridSearchCV  # Perforing grid search
 import warnings
